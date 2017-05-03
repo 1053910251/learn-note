@@ -1,0 +1,66 @@
+在vue项目中使用axios插件进行异步promise请求
+
+// 引入axios异步插件
+import axios from 'axios'
+import qs from 'qs'
+// 引入js-cookie, 获取浏览器保存的cookie
+import Cookie from 'js-cookie'
+
+// 设置请求超时时间
+axios.defaults.timeout = 2000
+// 配置post请求头
+axios.defaults.header.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+// 设置域名
+axios.defaults.baseURL = '域名或主机地址'
+
+// 拦截post请求， 进行post传参序列化
+axios.interceptors.request.use((config) => {
+	if(config.method === 'post') {
+		// 序列化post传参
+		config.data = qs.stringify(config.data)
+	}
+	return config
+}, (error) => {
+	console.log('错误的传参')
+	return Promise.reject(error)
+})
+
+// 拦截post响应，对响应结果进行处理
+axios.interceptors.response.use((res) => {
+	// 判断登录的ticket是否过期
+	if(res.data && res.data.ticket == '过期') {
+		// 重定向到登录页面，重新登录
+	}
+	return res
+}, (error) => {
+	return Promise.reject(error)
+})
+
+// 生成异步请求的URL,为每个请求加上服务、接口名、uid、ticket
+function buildURL(obj) {
+	let arr = [
+		axios.defaults.baseURL,
+		obj.service,
+		obj.method
+	]
+	let _url = arr.join('/')
+	let querys = 'uid=' + Cookie.get('uid') + '&ticket=' + Cookie.get('ticket')
+	
+	_url +=  ('/?' + querys)
+	
+	return _url
+}
+
+// 导出一个方法，提供import方式导入的形式调用 例：import axios from 'axios.js'
+export default function(obj) {
+	let requestData = {
+		args: JSON.stringify(obj.args || {})
+	}
+	let url = buildURL(obj)
+	
+	return axios({
+		method: 'post',
+		url: url,
+		data: requestData
+	})
+}
