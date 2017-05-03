@@ -1,0 +1,46 @@
+// 使用vue-router
+
+import Vue from 'vue'
+// 引入vue-router插件
+import VueRouter from 'vue-router'
+
+// Vue使用插件的方法
+Vue.use(VueRouter)
+
+// 定义路由路径和组件的关系
+// 注：对于项目越来越大，路由配置很多的情况下，可以对routes进行路由拆分，防止单个路由文件过大
+const routes = [
+  {
+    path: '/path1'
+    compontent: '组件名称'
+  },
+  {
+    path: '/path2'
+    compontent: '组件名称',
+    children: [
+      {path: 'childPath1', compontent: '组件名'}
+      {path: 'cheildPath2/pop', compontents:{ default: '默认组件名', popView: 'pop弹窗组件'}}
+    ]
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+router.beforeEach((to, from, next) => {
+  // 路由之前的钩子函数，可以进行路由权限的教研等
+  if('校验通过') {
+    return next()
+  }
+})
+
+export default router
+
+/**
+* 路由拆分
+*/
+1. 根据路由的类型拆分成不同的模块
+2. 模块下可以细分不同的路由文件，统一使用export default提供对外的访问
+2. 每个模块定义一个index.js文件进行导入(import)这个模块下的各个路由文件,同时也提供export default提供对外的访问
+3. 最后在new VueRouter的时候引入各个模块下的index.js文件
