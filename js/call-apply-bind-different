@@ -19,3 +19,14 @@
   this的指向在函数创建时是确定不了的，在调用的时候才能决定，谁调用就指向谁，调用时指向其上下文对象。
   通过call、apply、bind可以改变其this的指向
  
+5.对于老是不支持bind的浏览器，可以自定义bind方法 通过call和apply组合使用
+  if(!('bind') in Function.prototype) {
+    Function.prototype.bind = function() {
+      var fn = this; // 调用的上下文对象
+      var context =  arguments[0]; // 需绑定的上下文对象
+      var args = Array.prototype.slice.call(argument, 1); // 将参数转化成数组
+      return funciton() {
+        return fn.apply(context, args);
+      }
+    }
+  }
