@@ -1,0 +1,21 @@
+1.绑定this的方法：通过call、apply、bind可以固定/切换this的指向
+2.
+  a. obj.fun.call(thisObj, agr1, arg2, arg3, ...) or obj.call(thisObj, arg1, arg2, arg3, ...)
+     调用obj对象的fun方法，call将fun函数的this上下文对象obj改为指向thisObj，第二个开始之后的参数为传入fun函数中的参数
+  b. obj.fun.apply(thisObj, [arg1, arg2, arg3, ...]) or obj.apply(thisObj, arg1, arg2, arg3, ...)
+     调用obj对象的fun方法，call将fun函数的this上下文对象obj改为指向thisObj，第二个开始之后的参数为传入fun函数中的参数
+  c. obj.fun.bind(thisObj, arg1, arg2, arg3, ...) or obj.bind(thisObj, arg1, arg2, arg3, ...)
+     用于将函数体内部的this绑定到某个对象thisObj，arg1, arg2, ...等可以绑定函数的参数。绑定后返回一个新函数。其内部的this的指向为thisObj
+     例：
+        var add = funciton(x, y){ ... }
+        var obj = {}
+        var newAdd = add.bind(obj, 5) // newAdd函数的内部this的指向为obj，且x绑定为5，之后调用newAdd方法时，只需传入y的值
+        newAdd(5)
+3.区别
+  1.call和apply唯一的区别就是传参个数的不同，apply只能传两个参数，且第二个参数必须为array。call()可以穿任意参数。call可以传入任意个数参数
+  2.bind和call的区别是call调用后函数立即执行，bind调用后返回一个新函数
+  
+4.js的指向问题
+  this的指向在函数创建时是确定不了的，在调用的时候才能决定，谁调用就指向谁，调用时指向其上下文对象。
+  通过call、apply、bind可以改变其this的指向
+ 
