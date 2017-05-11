@@ -1,5 +1,6 @@
 1. es6 新增一个Proxy对象，用来代理对目标对象的访问 Proxy(target, handle)
-   target参数为代理的目标对象，handle为代理的配置对象
+   target参数为代理的目标对象，handle为代理的配置对象,可以代理get、set、apply、construct等方法
+   如果一个属性是不可配置（configurable: false）和不可写（writable: false），该属性不能被代理
 例：
   /* 使用proxy代理实现对数组的复数索引访问 */
   function createArray(...elements) {
