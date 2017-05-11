@@ -1,0 +1,63 @@
+1. es6 新增一个Proxy对象，用来代理对目标对象的访问 Proxy(target, handle)
+   target参数为代理的目标对象，handle为代理的配置对象
+例：
+  /* 使用proxy代理实现对数组的复数索引访问 */
+  function createArray(...elements) {
+    /* 拦截对目标对象的get访问 */
+    let handler = {
+      get(target, key, receiver) {
+        let index = Number(key)
+        if(index < 0) {
+          key = String(target.length + index)
+        }
+        /* 反射访问目标对象的get函数 */
+        return Reflect.get(target, key, receiver)
+      }
+    }
+    
+    let target = []
+    target.push(...elements)
+    return new Proxy(target, handler)
+  }
+  
+  let arr = createArray('aaa', 'bbb', 'ccc')
+  arr[2] // ccc
+  arr[-1] // ccc
+  
+例：
+  /* 实现一个通用的dom生成对象 */
+  const dom = new Proxy({}, {
+    /* 代理对目标函数get的访问 */
+    get(target, property) {
+      /* 返回一个函数 */
+      return function(attrs={}, ...children) {
+        /* 根据访问的key创建dom元素 */
+        let el = document.createElement(property)
+        /* 根据attrs设置元素的属性 */
+        for(let prop of Objcet.keys(attrs)) {
+          el.setAttribute(prop, attrs[prop])
+        }
+        /* 设置元素的子元素 */
+        for(let child of children) {
+          /* 如果传入的参数是字符串 */
+          if(typeof child === 'string') {
+            child = document.createTextNode(child)
+          }
+          el.appendChild(child)
+        }
+        /* 返回创建的名为property的dom元素 */
+        return el
+      }
+    }
+  })
+  
+  const el = dom.div({}, 
+    'hello my name is',
+    dom.a({href: '//example.com'}, 'aaa'),
+    '. I like',
+    dom.ul({}, 
+      dom.li({}, 'js'),
+      dom.li({}, 'html'),
+      dom.li({}, 'css)
+    )
+  )
