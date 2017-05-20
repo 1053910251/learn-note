@@ -1,0 +1,66 @@
+简单的弹窗插件
+
+1. vuejs插件是什么
+MyPlugin.install = function(Vue, options) {
+  /* 添加全局方法和属性 */
+  Vue.myGlobalMethod = function() {
+    // 逻辑代码 ...
+  }
+  /* 添加全局资源：指令、过滤器、过度等 */
+  Vue.directive('my-directive', {
+    bind(el, binding, vnode, oldvnode) {
+      // 逻辑代码 ...
+    }
+  })
+  /* 通过全局mixin方法添加一些组件选项 */
+  Vue.mixin({
+    created: function() {
+      // ...
+    }
+  })
+  /* 添加实例方法，通过把他们添加到Vue.prototype */
+  Vue.prototype.$myMethod = function(options) {
+    // ...
+  }
+}
+2. 简单的弹窗提示插件
+var Toast = {}
+Toast.install = function （Vue, options） {
+  /* 默认配置 */
+  let opt = {
+    defaultType: 'top', //默认顶部显示
+    duration: '2500' // 默认显示2.5秒
+  }
+  /* 更改配置为传入的自定义选项 */
+  for(let property in options) {
+    opt[property] = options[property]
+  }
+  /* 在实例化得Vue实例上添加$toast方法 */
+  Vue.prototype.$toast = (tips, type) => {
+    /* 如果传入了type */
+    if(type) {
+      opt.defaultType = type
+    }
+    /* 如果弹窗已经存在，直接返回 */
+    if(document.getElementByClassName('vue-toast').length) {
+      return
+    }
+    /* 定义一个组件 */
+    let ToastTpl = Vue.extend({
+      template: '<div class="vue-toast toast-'+ opt.defaultType +'">'+tips+'</div>'
+    })
+    /* 编译模板成dom */
+    let tpl = new ToastTpl().$mount.$el
+    document.body.appendChild(tpl)
+    /* 设置多少时间后消失 */
+    setTimeout(function() {
+      document.body.removeChild(tpl)
+    }, opt.duration)
+  }
+  /* 根据不同的class来控制在不同的地方显示 */
+  ['bottom', 'center', 'top'].forEach(type => {
+    Vue.prototype.$toast[type] = (tips) => {
+      return Vue.prototype.$toast(tips, type)
+    }
+  })
+}
