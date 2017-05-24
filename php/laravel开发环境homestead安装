@@ -1,0 +1,7 @@
+1.下载文件，并安装
+  Virtual Box 5.1.18：http://pan.baidu.com/s/1i5HsPNJ
+  Vagrant 1.9.3：http://pan.baidu.com/s/1sl79fNv
+  homestead-virtualbox-2.0.0.box：http://pan.baidu.com/s/1eSkoYau
+  运行homestead对vagrant的版本有要求
+2.运行vagrant -v检查是否安装成功
+3.安装配置步骤：https://docs.golaravel.com/docs/5.4/homestead/
