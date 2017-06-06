@@ -13,4 +13,4 @@ http://www.cnblogs.com/liuyt/p/6874033.html
 Sequelize 中文API文档
 https://itbilu.com/nodejs/npm/VkYIaRPz-.html
 
-sequelize自动化工具sequelize-auto
+sequelize自动化工具sequelize-auto  https://www.npmjs.com/package/sequelize-auto
