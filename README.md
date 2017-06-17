@@ -16,3 +16,5 @@ https://itbilu.com/nodejs/npm/VkYIaRPz-.html
 sequelize自动化工具sequelize-auto  https://www.npmjs.com/package/sequelize-auto
 
 nodejs爬虫获取网易云音乐数据     http://www.jianshu.com/p/486ebec4d3a9
+ 
+eslint 配置：http://www.cnblogs.com/toward-the-sun/p/6258152.html
