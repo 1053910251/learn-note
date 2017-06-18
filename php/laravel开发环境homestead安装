@@ -1,7 +1,41 @@
-1.下载文件，并安装
-  Virtual Box 5.1.18：http://pan.baidu.com/s/1i5HsPNJ
-  Vagrant 1.9.3：http://pan.baidu.com/s/1sl79fNv
-  homestead-virtualbox-2.0.0.box：http://pan.baidu.com/s/1eSkoYau
-  运行homestead对vagrant的版本有要求
-2.运行vagrant -v检查是否安装成功
-3.安装配置步骤：https://docs.golaravel.com/docs/5.4/homestead/
+1.安装vagrant、virtualbox
+vagrant下载地址：https://www.vagrantup.com/downloads.html
+virtualbox下载地址：https://www.virtualbox.org/wiki/Downloads
+
+2.导入box
+vagrant box add laravel/homestead
+开一个vpn下载1个小时。
+
+vagrant box add laravel/homestead homestead.box
+下载homestead.box到本地文件夹，从本地运行
+
+vagrant box list查看
+
+3.运行vagrant box list
+￼
+4.用户目录下，下载homestead
+git clone https://github.com/laravel/homestead.git Homestead
+进入homestead目录
+
+运行bash init.sh，创建Homestead.yaml文件
+
+5.配置homestead.yaml
+￼
+6.修改Hosts文件
+
+vi /etc/hosts
+￼
+7.生成ssh的key
+运行ssh-keygen命令
+
+8.运行vagrant up
+
+9.在~/Code目录下安装lavavel
+composer create-project laravel/laravel Laravel
+
+10.访问yiien.com
+
+遇到的问题解决
+http://www.cnblogs.com/daaixiaonvjing/p/6692418.html
+http://blog.csdn.net/rovast/article/details/70213800
+http://www.jianshu.com/p/ae9d1261bbd8
