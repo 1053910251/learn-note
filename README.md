@@ -19,4 +19,4 @@ nodejs爬虫获取网易云音乐数据     http://www.jianshu.com/p/486ebec4d3a
  
 eslint 配置：http://www.cnblogs.com/toward-the-sun/p/6258152.html
 http://www.rsdown.cn/down/55249.html
-mobiscroll: http://blog.csdn.net/shimiso/article/details/49782011
+mobiscroll: http://blog.csdn.net/shimiso/article/details/49782011  http://blog.csdn.net/enjoy_gw/article/details/52779852
