@@ -4,4 +4,5 @@
   内容为：
   @php "%~dp0composer.phar" %*
 4.确保php在环境变量中，命令行执行composer.bat
-5.执行composer -v 看是否安装成功
+5.命令窗口cmd执行composer -v 看是否安装成功
+6.修改为国内的镜像：https://laravel-china.org/composer
