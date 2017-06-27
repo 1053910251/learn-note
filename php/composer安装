@@ -1,0 +1,8 @@
+1.下载composer.phar
+2.将composer.phar放入php的安装目录下即php.exe目录
+3.新建composer.bat文件
+  内容为：
+  @ECHO OFF
+  php "%~dp0composer.phar" %*
+4.php放入环境变量中
+5.执行composer -v 看是否安装成功
