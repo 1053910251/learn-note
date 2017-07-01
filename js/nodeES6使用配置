@@ -1,0 +1,23 @@
+1.
+增加package.json配置
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-2": "^6.0.0",
+    "babel-register": "^6.0.0",
+2.新建start.js
+  let register = require('babel-register')
+  register({
+      presets: ['stage-2']
+  })
+  require('./app')
+3.修改package.json的"server": "node start.js"
+4.koa-bodyparser 报错SyntaxError: Unexpected token function
+  koa1使用 npm install koa-bodyparser@2
+  koa2使用 npm install koa-bodyparser@3
+5.koa-jwt 报错SyntaxError: Unexpected token function
+  koa1使用 npm install koa-jwt@1
+  koa2并且node< 7.6 使用 npm install koa-jwt@2.
+  koa2并且node>= 7.6 使用 npm install koa-jwt@3.
