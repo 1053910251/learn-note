@@ -1,0 +1,160 @@
+ /*
+ * new 构造函数的过程
+ * 1.创建一个空对象
+ * 2.将构造函数的作用域指向这个对象
+ * 3.执行构造函数中的代码
+ * 4.返回创建的对象
+ */
+
+/* 原型链继承 */
+var Parent = function() {
+    this.name = 'xiaoming'
+    this.skill = ['java', 'javascript', 'js']
+}
+Parent.prototype.getName = function() {
+    console.log(this.name)
+}
+
+var Child = function() {
+    this.age = 21
+}
+Child.prototype = new Parent()
+Child.prototype.constructor = Child
+
+var child1 = new Child()
+/*
+* 缺点：
+*   1.创建Child实例时，不能像Parent传递参数
+*   2.引用类型的属性被所有的实例共享,当child1.skill是。当修改child1.skill时。同时也影响了child2.skill
+*     Parent的实例时Child的原型
+*     因为Child的原型指向一个Parent实例。在Child实例中找不到的属性就会在原型链上寻找。
+* 优点：
+*   1.可以继承原型链上的属性和方法
+*/
+
+
+/* 经典继承（借用构造函数继承） */
+var Parent = function() {
+    this.name = 'xiaoming'
+    this.skill = ['java', 'javascript', 'php']
+}
+Parent.prototype.getName = function () {
+    console.log(this.name)
+}
+
+var Child = function () {
+    Parent.call(this)
+}
+
+var child1 = new Child()
+
+ /*
+ * 缺点
+  *  1.只能继承Parent构造函数中的方法和属性。其原型链上的属性和方法不能被继承。
+  *  2.所有方法写在构造函数中,每次创建实例都需要创建一遍方法
+  *优点：
+  *  1.创建Child实例时。可以向Parent传递参数，
+  *  2.避免了引用类型的数据被所有实例共享
+ */
+
+
+ /* 组合继承（原型链和构造函数） */
+ var Parent = function (name) {
+     this.name = name
+     this.skill = ['java', 'javascript', 'php']
+ }
+
+ Parent.prototype.getName = function () {
+     console.log(this.name)
+ }
+
+ var Child = function (name, age) {
+     Parent.call(this, name)
+     this.age = age
+ }
+
+ Child.prototype = new Parent()
+
+ var child1 = new Child('xiaoming', 18)
+ var child2 = new Child('xiaohong', 20)
+
+ /*
+ *  融合原型链继承和构造函数继承的优点，是常用的继承方式
+ *  缺点：
+ *      创建Child实例时会调用两次Parent的构造函数
+ *      可以间接的用Child.prototype 访问 Parent.prototype解决调用两次Parent构造函数
+ *      三步：
+ *          var F = function(){}
+ *          F.prototype = Parent.prototype
+ *          Child.prototype = new F()
+ */
+
+/* 原型式继承 */
+function createObj(obj) {
+    function F() {}
+    F.prototype = obj
+    return new F()
+}
+
+var person = {
+    name: 'xiaoming',
+    skill: ['php', 'java', 'javascript']
+}
+
+var person1 = createObj(person)
+var person2 = createObj(person)
+
+/*
+*  ES5 Object.create的模拟实现将传入的对象作为传入对象的原型
+*  缺点：
+*    1.引用类型的数据会被所有的实例共享，和原型链继承一样
+*  注意
+*    修改person1.name的值，person2.name的值并未发生改变，并不是因为person1和person2有独立的name 值，而是因为person1.name = 'person1'，
+*    给person1添加了name值，并非修改了原型上的name值。
+*    而person1.skill.push('python') 则修改了原型上的skill，影响了所有实例
+*/
+
+
+ /* 寄生式继承 */
+function createObj(obj) {
+    var clone = Object.create(obj)
+    clone.sayHello = function () {
+        console.log('hello')
+    }
+    return clone
+}
+ var person = {
+     name: 'xiaoming',
+     skill: ['php', 'java', 'javascript']
+ }
+
+ var person1 = createObj(person)
+ var person2 = createObj(person)
+
+/*
+* 跟借用构造函数模式一样，每次创建对象都会创建一遍方法
+*/
+ 
+/* 组合寄生继承 */
+function Parent(name) {
+    this.name = name
+    this.skill = ['php', 'java', 'javascript']
+}
+
+Parent.prototype.getName = function () {
+    console.log(this.name)
+}
+
+function Child(name, age) {
+    Parent.call(this, name)
+    this.age = age
+}
+
+ var F = function () {}
+ F.prototype = Parent.prototype
+ Child.prototype = new F()
+
+var child1 = new Child('xiaoming', 18)
+var child2 = new Child('xiaohong', 20)
+
+
