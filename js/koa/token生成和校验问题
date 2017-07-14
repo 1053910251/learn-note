@@ -1,0 +1,21 @@
+middleware：
+  jsonwebtoken: 生成token
+    例：
+      const jwt = require('jsonwebtoken')
+      /* 生成token的key */
+      const token_secret_key = 'private key'
+      /* token包含的信息 */
+      const tokenInfo = {
+        key1: 'value1',
+        key2: 'value2'
+      }
+      /* 生成token */
+      const token = jwt.sign(tokenInfo, token_secret_key)
+      具体参数设置：
+      https://github.com/auth0/node-jsonwebtoken
+  koa-jwt：校验token
+    请求头中设置：Authorization: 'Bearer ' + token
+    校验：
+      app.use(jwt({secret: token_secret_key}))
+      解析token获取的数据存放在ctx.state.user
+      
