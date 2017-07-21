@@ -28,3 +28,4 @@ Lumen中使用速度更快的PhpRedis扩展：http://www.tuicool.com/articles/qU
 
 babel的使用: http://www.jianshu.com/p/7a7f7abcddb5
 
+vue预览pdf：http://www.cnblogs.com/yunyi1895/p/6490790.html
