@@ -33,3 +33,5 @@ vue预览pdf：http://www.cnblogs.com/yunyi1895/p/6490790.html
 node使用redis https://www.ibm.com/developerworks/cn/opensource/os-cn-nodejs-redis/
 
 node和zookeeper：http://blog.csdn.net/imwebteam/article/details/53310820
+
+wamp开启https访问：http://blog.csdn.net/xjymcc/article/details/54380241
