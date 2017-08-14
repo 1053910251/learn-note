@@ -35,3 +35,5 @@ node使用redis https://www.ibm.com/developerworks/cn/opensource/os-cn-nodejs-re
 node和zookeeper：http://blog.csdn.net/imwebteam/article/details/53310820
 
 wamp开启https访问：http://blog.csdn.net/xjymcc/article/details/54380241
+
+多个提高Node.js应用吞吐量的小优化技巧介绍: https://zhuanlan.zhihu.com/p/25276558
