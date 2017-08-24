@@ -39,3 +39,5 @@ node和zookeeper：http://blog.csdn.net/imwebteam/article/details/53310820
 wamp开启https访问：http://blog.csdn.net/xjymcc/article/details/54380241
 
 多个提高Node.js应用吞吐量的小优化技巧介绍: https://zhuanlan.zhihu.com/p/25276558
+
+https://www.alwayscoder.com/using-laravel-and-dingo-build-your-restful-api/
