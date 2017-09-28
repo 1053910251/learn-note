@@ -1,0 +1,8 @@
+1.简单node程序调试
+  直接只用node自带的命令进行调试   node --debug xxx.js
+2.使用node-inspector调试
+  a.安装 node-inspector：npm install -g node-inspector
+  b.启动项目：nodemon --debug xxx.js，
+  c.新开一个命令窗口，启动 node-inspector：node-inspector
+  d.http://127.0.0.1:8080/debug?port=5858 访问 debug 页面，就可以开始 debug 了
+3.使用devtool调试
